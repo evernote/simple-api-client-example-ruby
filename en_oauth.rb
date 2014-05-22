@@ -47,7 +47,7 @@ helpers do
     filter = Evernote::EDAM::NoteStore::NoteFilter.new
     counts = note_store.findNoteCounts(auth_token, filter, false)
     notebooks.inject(0) do |total_count, notebook|
-      total_count + (counts.notebookCounts[notebook.guid] || 0)
+      total_count + (counts.notebookCounts && counts.notebookCounts[notebook.guid] || 0)
     end
   end
 end
@@ -155,7 +155,7 @@ __END__
 </body>
 </html>
 
-@@ error 
+@@ error
 <html>
 <head>
   <title>Evernote Ruby Example App &mdash; Error</title>
